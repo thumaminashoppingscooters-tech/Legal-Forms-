@@ -58,39 +58,23 @@
                     </a>
                 </div>
 
+                <a href="https://play.google.com/store/apps/details?id=com.thumamina.customer" class="app-card-link" target="_blank" rel="noopener">
                 <div class="app-card">
                     <div class="app-icon">&#128722;</div>
                     <div class="app-info">
-                        <div class="app-badge available">Available</div>
+                        <div class="app-badge play-store">Play Store</div>
                         <h3>Customer App</h3>
                         <p>Order deliveries, track your packages, and pay seamlessly.</p>
-                        <div class="app-meta">
-                            <div class="meta-item">
-                                <span class="meta-label">Version</span>
-                                <span class="meta-value" data-meta="customer-version">1.2.1+6</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-label">Released</span>
-                                <span class="meta-value" data-meta="customer-date">30 July 2026</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-label">File Size</span>
-                                <span class="meta-value" data-meta="customer-size">~65 MB</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-label">Minimum Android</span>
-                                <span class="meta-value">Android 8.0+</span>
-                            </div>
-                            <div class="meta-item">
-                                <span class="meta-label">Status</span>
-                                <span class="meta-value">Latest Stable</span>
-                            </div>
-                        </div>
+                        <p style="margin-top: 8px; color: var(--text-secondary); font-size: 14px;">
+                            Available on Google Play &mdash; tap here to install.
+                        </p>
                     </div>
-                    <a href="https://storage.googleapis.com/thuma-mina-downloads/downloads/latest/customer.apk" class="btn-download" id="btn-download-customer" rel="noopener">
-                        Download APK
-                    </a>
+                    <span class="btn-play-store">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 20.5v-17a1.5 1.5 0 0 1 2.3-1.28L19.39 10.7a1.5 1.5 0 0 1 0 2.56L5.3 21.78A1.5 1.5 0 0 1 3 20.5z"/></svg>
+                        Get it on Play Store
+                    </span>
                 </div>
+                </a>
 
             </div>
 
@@ -114,24 +98,20 @@
     fetch(METADATA_URL)
         .then(function(r) { return r.json(); })
         .then(function(meta) {
-            function setMeta(prefix, appMeta) {
-                var el = document.querySelector('[data-meta="' + prefix + '-version"]');
-                if (el && meta.version) el.textContent = meta.version;
+            var el;
+            el = document.querySelector('[data-meta="driver-version"]');
+            if (el && meta.version) el.textContent = meta.version;
 
-                el = document.querySelector('[data-meta="' + prefix + '-date"]');
-                if (el && meta.build_date) {
-                    el.textContent = new Date(meta.build_date)
-                        .toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
-                }
-
-                el = document.querySelector('[data-meta="' + prefix + '-size"]');
-                if (el && appMeta && appMeta.size_bytes) {
-                    el.textContent = (appMeta.size_bytes / (1024 * 1024)).toFixed(1) + ' MB';
-                }
+            el = document.querySelector('[data-meta="driver-date"]');
+            if (el && meta.build_date) {
+                el.textContent = new Date(meta.build_date)
+                    .toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
             }
 
-            setMeta('driver', meta.apps && meta.apps.driver);
-            setMeta('customer', meta.apps && meta.apps.customer);
+            el = document.querySelector('[data-meta="driver-size"]');
+            if (el && meta.apps && meta.apps.driver && meta.apps.driver.size_bytes) {
+                el.textContent = (meta.apps.driver.size_bytes / (1024 * 1024)).toFixed(1) + ' MB';
+            }
         })
         .catch(function() { /* Silent fallback to static values */ });
 })();
