@@ -33,7 +33,7 @@
                         <div class="app-meta">
                             <div class="meta-item">
                                 <span class="meta-label">Version</span>
-                                <span class="meta-value" data-meta="driver-version">1.2.0+5</span>
+                                <span class="meta-value" data-meta="driver-version">1.2.1+6</span>
                             </div>
                             <div class="meta-item">
                                 <span class="meta-label">Released</span>
@@ -58,14 +58,38 @@
                     </a>
                 </div>
 
-                <div class="app-card" style="opacity: 0.5;">
+                <div class="app-card">
                     <div class="app-icon">&#128722;</div>
                     <div class="app-info">
-                        <div class="app-badge coming-soon">Coming Soon</div>
+                        <div class="app-badge available">Available</div>
                         <h3>Customer App</h3>
                         <p>Order deliveries, track your packages, and pay seamlessly.</p>
+                        <div class="app-meta">
+                            <div class="meta-item">
+                                <span class="meta-label">Version</span>
+                                <span class="meta-value" data-meta="customer-version">1.2.1+6</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Released</span>
+                                <span class="meta-value" data-meta="customer-date">30 July 2026</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">File Size</span>
+                                <span class="meta-value" data-meta="customer-size">~65 MB</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Minimum Android</span>
+                                <span class="meta-value">Android 8.0+</span>
+                            </div>
+                            <div class="meta-item">
+                                <span class="meta-label">Status</span>
+                                <span class="meta-value">Latest Stable</span>
+                            </div>
+                        </div>
                     </div>
-                    <span class="btn-download disabled">Download APK</span>
+                    <a href="https://storage.googleapis.com/thuma-mina-downloads/downloads/latest/customer.apk" class="btn-download" id="btn-download-customer" rel="noopener">
+                        Download APK
+                    </a>
                 </div>
 
             </div>
@@ -90,20 +114,24 @@
     fetch(METADATA_URL)
         .then(function(r) { return r.json(); })
         .then(function(meta) {
-            var el;
-            el = document.querySelector('[data-meta="driver-version"]');
-            if (el && meta.version) el.textContent = meta.version;
+            function setMeta(prefix, appMeta) {
+                var el = document.querySelector('[data-meta="' + prefix + '-version"]');
+                if (el && meta.version) el.textContent = meta.version;
 
-            el = document.querySelector('[data-meta="driver-date"]');
-            if (el && meta.build_date) {
-                el.textContent = new Date(meta.build_date)
-                    .toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+                el = document.querySelector('[data-meta="' + prefix + '-date"]');
+                if (el && meta.build_date) {
+                    el.textContent = new Date(meta.build_date)
+                        .toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+                }
+
+                el = document.querySelector('[data-meta="' + prefix + '-size"]');
+                if (el && appMeta && appMeta.size_bytes) {
+                    el.textContent = (appMeta.size_bytes / (1024 * 1024)).toFixed(1) + ' MB';
+                }
             }
 
-            el = document.querySelector('[data-meta="driver-size"]');
-            if (el && meta.apps && meta.apps.driver && meta.apps.driver.size_bytes) {
-                el.textContent = (meta.apps.driver.size_bytes / (1024 * 1024)).toFixed(1) + ' MB';
-            }
+            setMeta('driver', meta.apps && meta.apps.driver);
+            setMeta('customer', meta.apps && meta.apps.customer);
         })
         .catch(function() { /* Silent fallback to static values */ });
 })();
