@@ -7,13 +7,32 @@
     <link rel="stylesheet" href="../assets/styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
+    <header class="site-header">
+        <div class="header-inner">
+            <a href="index.html" class="brand-link">
+                <span class="brand-icon">&#9889;</span>
+                <span class="brand-title">Thuma Mina</span>
+            </a>
+            <nav class="header-nav">
+                <a href="index.html">Legal Hub</a>
+                <a href="privacy.html">Privacy</a>
+                <a href="customer-terms.html">Customer Terms</a>
+                <a href="driver-terms.html">Driver Terms</a>
+                <a href="downloads/applications.html">Downloads</a>
+                <a href="delete-account.html" class="active">Account</a>
+            </nav>
+        </div>
+    </header>
+
     <div class="container">
         <div class="policy-card">
-            <h1>Account Deletion & Data Closure</h1>
-            <p style="color: var(--text-secondary); margin-bottom: 20px;">Manage your Thuma Mina account and personal data removal requests.</p>
+            <h1>Account Deletion &amp; Data Closure</h1>
+            <p style="color: var(--text-secondary); margin-bottom: 20px;">
+                Manage your Thuma Mina account closure and personal data removal requests.
+            </p>
             
             <div class="divider"></div>
 
@@ -25,23 +44,23 @@
             <!-- Tab 1: Immediate Self-Service Deletion -->
             <div id="immediate-tab" class="tab-content active">
                 <div class="warning-box">
-                    <h3>⚠️ Crucial Data Warning</h3>
+                    <h3>&#9888; Crucial Data Warning</h3>
                     <ul>
-                        <li>Your personal profile details, contact numbers, and avatars will be wiped or anonymized.</li>
-                        <li>This action is permanent. Once deleted, you cannot log back in with this account.</li>
-                        <li>Past transactions, receipts, and order histories are kept securely to comply with financial and tax regulations.</li>
-                        <li>You can register a fresh account using the same email address in the future.</li>
+                        <li>Your personal profile details, contact numbers, and avatars will be permanently removed or anonymized.</li>
+                        <li>This action is irreversible. Once deleted, you cannot log back in with this account.</li>
+                        <li>Past transactions, receipts, and order records are preserved in encrypted archives to comply with financial and tax regulations.</li>
+                        <li>You may register a fresh account using the same email address in the future.</li>
                     </ul>
                 </div>
 
                 <form id="immediate-form" onsubmit="handleImmediateDeletion(event)">
                     <div class="form-group">
                         <label for="imm-email">Email Address</label>
-                        <input type="email" id="imm-email" required placeholder="Enter your account email">
+                        <input type="email" id="imm-email" required placeholder="Enter your account email" autocomplete="email">
                     </div>
                     <div class="form-group">
                         <label for="imm-password">Password</label>
-                        <input type="password" id="imm-password" required placeholder="Enter your password">
+                        <input type="password" id="imm-password" required placeholder="Enter your password" autocomplete="current-password">
                     </div>
                     <button type="submit" id="imm-submit-btn" class="btn-delete">Confirm and Delete Account</button>
                 </form>
@@ -49,11 +68,11 @@
 
             <!-- Tab 2: Manual Deletion Request -->
             <div id="request-tab" class="tab-content">
-                <div class="warning-box" style="background-color: rgba(255, 215, 0, 0.03); border-color: rgba(255, 215, 0, 0.15);">
-                    <h3 style="color: var(--primary-yellow);">Google / Apple / Phone Sign-in Users</h3>
-                    <p style="color: var(--text-secondary); font-size: 13.5px; line-height: 1.5;">
-                        If you signed up using Google, Apple, or do not have a password, submit a deletion request below. 
-                        Our compliance team will verify and delete your account within 48 hours.
+                <div class="warning-box" style="background-color: rgba(255, 208, 0, 0.04); border-color: rgba(255, 208, 0, 0.2);">
+                    <h3 style="color: var(--primary-yellow);">&#128272; Google / Apple / Phone Sign-in Users</h3>
+                    <p style="color: var(--text-secondary); font-size: 13.5px; line-height: 1.5; margin: 0;">
+                        If you signed up using Google, Apple ID, or phone OTP without a password, submit a deletion request below. 
+                        Our compliance team will verify identity and permanently close your account within 48 hours.
                     </p>
                 </div>
 
@@ -67,31 +86,32 @@
                     </div>
                     <div class="form-group">
                         <label for="req-name">Full Name</label>
-                        <input type="text" id="req-name" required placeholder="Enter your full name">
+                        <input type="text" id="req-name" required placeholder="Enter your full legal name" autocomplete="name">
                     </div>
                     <div class="form-group">
                         <label for="req-email">Email Address</label>
-                        <input type="email" id="req-email" required placeholder="Enter your account email">
+                        <input type="email" id="req-email" required placeholder="Enter your registered email" autocomplete="email">
                     </div>
                     <div class="form-group">
                         <label for="req-phone">Phone Number</label>
-                        <input type="text" id="req-phone" required placeholder="Enter your phone number (e.g. +27...)">
+                        <input type="text" id="req-phone" required placeholder="Enter your phone number (e.g. +27...)" autocomplete="tel">
                     </div>
                     <div class="form-group">
                         <label for="req-reason">Reason for Account Closure (Optional)</label>
-                        <textarea id="req-reason" placeholder="Please let us know how we can improve..."></textarea>
+                        <textarea id="req-reason" placeholder="Please let us know why you are leaving or how we can improve..."></textarea>
                     </div>
-                    <button type="submit" id="req-submit-btn" class="btn-delete" style="background-color: var(--primary-yellow); color: black;">Submit Deletion Request</button>
+                    <button type="submit" id="req-submit-btn" class="btn-delete" style="background-color: var(--primary-yellow); color: #000; box-shadow: 0 4px 15px var(--primary-yellow-glow);">Submit Deletion Request</button>
                 </form>
             </div>
 
             <div id="status-box" class="status-message"></div>
 
             <div class="nav-links">
-                <a href="index.html">Home</a>
+                <a href="index.html">Legal Hub</a>
                 <a href="privacy.html">Privacy Policy</a>
                 <a href="customer-terms.html">Customer Terms</a>
                 <a href="driver-terms.html">Driver Terms</a>
+                <a href="downloads/applications.html">Downloads</a>
             </div>
         </div>
     </div>
